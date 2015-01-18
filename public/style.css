@@ -1,4 +1,3 @@
-
 #main-wrapper{
 	width: 1200px;
 	background-color: red;
@@ -6,9 +5,23 @@
 	position: relative;
 	margin: 0 auto;
 }
+h1{
+	margin: auto;
+}
 .movie-list{
 	background-color: #FAEBD7;
 	border: 1px solid black;
+	overflow: hidden;
+}
+.movies{
+	height: 100%;
+	display: flex;
+	/*background-color: blue;*/
+}
+.slider{
+	height: 100%;
+	display: flex;
+	flex-direction: row;
 }
 #header{
 	width: 100%;
@@ -28,4 +41,9 @@
 #action{
 	height: 30%;
 	width: 100%;
+}
+.img{
+	height: 80%;
+	width: 60%;
+	margin: auto;
 }
