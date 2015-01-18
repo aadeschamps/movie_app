@@ -66,7 +66,11 @@ function getAll(movie){
 	xhr.addEventListener('load',function(e){
 		var d = xhr.responseText;
 		var parsed = JSON.parse(d);
-		$().attr('src', parsed.Poster)
+		$('#big_img').attr('src', parsed.Poster);
+		$('#title').text(parsed.Title);
+		$('#actors').text(parsed.Actors);
+		$('#rating').text("Rating: " + parsed.Rated);
+		$('#desc').text("Plot: " + parsed.Plot);
 	});
 	xhr.send();
 }
@@ -114,7 +118,8 @@ $(".com_movies").dblclick(function(e){
 	$("#pop-up").addClass("pop-in");
 	$('#darken').css("z-index", "4");
 	$('#darken').addClass("pop-in");
-	var index = $( this ).index()
+	var index = $( this ).index();
+	getAll(comedies[index]);
 });
 $(".dra_movies").dblclick(function(e){
 	$("#pop-up").removeClass("pop-out");
@@ -123,6 +128,8 @@ $(".dra_movies").dblclick(function(e){
 	$("#pop-up").addClass("pop-in");
 	$('#darken').css("z-index", "4");
 	$('#darken').addClass("pop-in");
+	var index = $( this ).index();
+	getAll(dramas[index]);
 });
 $(".act_movies").dblclick(function(e){
 	$("#pop-up").removeClass("pop-out");
@@ -131,6 +138,8 @@ $(".act_movies").dblclick(function(e){
 	$("#pop-up").addClass("pop-in");
 	$('#darken').css("z-index", "4");
 	$('#darken').addClass("pop-in");
+	var index = $( this ).index();
+	getAll(action[index]);
 });
 
 
