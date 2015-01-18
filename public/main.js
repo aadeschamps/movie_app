@@ -111,7 +111,7 @@ $(".dra_movies").dblclick(function(e){
 	$('#darken').css("z-index", "4");
 	$('#darken').addClass("pop-in");
 });
-$(".com_movies").dblclick(function(e){
+$(".act_movies").dblclick(function(e){
 	$("#pop-up").removeClass("pop-out");
 	$('#darken').removeClass("pop-out");
 	$('#pop-up').css("z-index","5");
