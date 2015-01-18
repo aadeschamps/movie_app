@@ -19,13 +19,25 @@ body{
 }
 #pop-up{
 	position: fixed;
+	display: flex;
+	flex-direction: column;
 	z-index: 1;
 	height: 80%;
 	width: 50%;
-	background-color: red;
+	background-color: #FAEBD7;
 	left: 25%;
 	top: 10%;
 	opacity: 0;
+}
+#pop-up-wrapper{
+	margin: auto;
+	display: fixed;
+	flex-direction: column;
+}
+#top{
+	display: flex;
+	flex-direction: rows;
+	margin: auto;
 }
 
 .pop-in{

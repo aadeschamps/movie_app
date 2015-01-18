@@ -58,6 +58,18 @@ function getImgUrl(movie, item){
 	});
 	xhr.send();
 };
+function getAll(movie){
+	var urled = encodeURI(movie);
+	var url = " http://omdbapi.com/?t=" + urled;
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", url);
+	xhr.addEventListener('load',function(e){
+		var d = xhr.responseText;
+		var parsed = JSON.parse(d);
+		$().attr('src', parsed.Poster)
+	});
+	xhr.send();
+}
 
 var mouse = [false, false, false];
 var curr_x = [0, 0, 0];
@@ -102,6 +114,7 @@ $(".com_movies").dblclick(function(e){
 	$("#pop-up").addClass("pop-in");
 	$('#darken').css("z-index", "4");
 	$('#darken').addClass("pop-in");
+	var index = $( this ).index()
 });
 $(".dra_movies").dblclick(function(e){
 	$("#pop-up").removeClass("pop-out");
