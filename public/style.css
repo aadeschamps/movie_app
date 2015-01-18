@@ -1,9 +1,80 @@
+*{
+	margin: 0;
+}
+*, *:before, *:after {
+    -webkit-user-select: none; /* Chrome/Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+}
+body{
+	display: flex;
+}
+#darken{
+	position: fixed;
+	z-index: 2;
+	opacity: 0;
+	background-color: rgba(0,0,0,.75);
+	height: 100%;
+	width: 100%;
+}
+#pop-up{
+	position: fixed;
+	z-index: 1;
+	height: 80%;
+	width: 50%;
+	background-color: red;
+	left: 25%;
+	top: 10%;
+	opacity: 0;
+}
+
+.pop-in{
+	animation-duration: 1s;
+	animation-name: appear;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-name: appear;
+	-webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
+   -moz-animation-fill-mode:forwards; /*FF 5+*/
+   -o-animation-fill-mode:forwards; /*Not implemented yet*/
+   -ms-animation-fill-mode:forwards; /*IE 10+*/
+   animation-fill-mode:forwards;
+}
+.pop-out{
+	animation-duration: 1s;
+	animation-name: disappear;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-name: disappear;
+	-webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
+   -moz-animation-fill-mode:forwards; /*FF 5+*/
+   -o-animation-fill-mode:forwards; /*Not implemented yet*/
+   -ms-animation-fill-mode:forwards; /*IE 10+*/
+   animation-fill-mode:forwards;
+}
+
+@-webkit-keyframes appear{
+	0%{	
+	}
+	100%{
+		opacity: 1;
+	}
+}
+@-webkit-keyframes disappear{
+	0%{	
+		opacity:1;
+	}
+	100%{
+		opacity: 0;
+	}
+}
+
 #main-wrapper{
+	z-index: 3;
 	width: 1200px;
 	background-color: red;
 	height: 1000px;
 	position: relative;
-	margin: 0 auto;
+	margin: auto;
+	margin-bottom: 5px;
 }
 h1{
 	margin: auto;
