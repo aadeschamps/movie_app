@@ -4,6 +4,8 @@ var dramas = ["The Godfather", "Forrest Gump", "12 Angry Men", "Titanic", "Fight
 var action = ["Saving Private Ryan" ,"Taken", "X-men", "The Expendables", "Die another day", "Die Hard", "Die Hard 2"];
 var c_length = (comedies.length * 25) + "%";
 
+// sets the length of each slider depending on how many movies are
+// in them and appends those movies to till the exact amount of slider
 $('#comedy-slider').css("width", c_length);
 for (var i = 0; i < comedies.length; i++) {
 	$('#comedy-slider').append("<div class='com_movies movies'></div>");
@@ -31,11 +33,8 @@ $('.com_movies').append('<img class="c_img img"></img>');
 $('.dra_movies').append('<img class="d_img img"></img>');
 $('.act_movies').append('<img class="a_img img"></img>');
 
-// console.log($('.c_img')[1].attr("src", "www.placekitten.com/g/200/200"));
-// for (var i = 0; i < comedies.length; i++) {
-// 	$('.c_img')[i].attr("src", "www.placekitten.com/g/200/200");
-// };
 
+// loops through all of the movies and calls the getImgUrl
 $('.c_img').each( function(index, item){
 	getImgUrl(comedies[index], item);
 });
@@ -46,6 +45,8 @@ $('.a_img').each( function(index, item){
 	getImgUrl(action[index], item);
 });
 
+// takes in movie title and item and queries OMDB,
+// gets the poster img url and sets the img src to it
 function getImgUrl(movie, item){
 	var urled = encodeURI(movie);
 	var url = " http://omdbapi.com/?t=" + urled;
@@ -57,7 +58,10 @@ function getImgUrl(movie, item){
 		$(item).attr('src', parsed.Poster)
 	});
 	xhr.send();
-};
+}
+
+// takes in movie title and gets all information for it
+// populates the pop-up divs information with it
 function getAll(movie){
 	var urled = encodeURI(movie);
 	var url = " http://omdbapi.com/?t=" + urled;
@@ -75,9 +79,16 @@ function getAll(movie){
 	xhr.send();
 }
 
+
+// controlls mouse clicks and current x position of
+// each row
 var mouse = [false, false, false];
 var curr_x = [0, 0, 0];
+
+// loop through each slider
 $(".slider").each( function(index, item){
+	// when mouse click down, set mouse to true
+	// of the current slider, and false when mouse down
 	$( this ).mousedown(function(event){
 		var offset = $( this ).parent().offset();
 		mouse[index] = true;
@@ -87,30 +98,42 @@ $(".slider").each( function(index, item){
 	$( this ).mouseup(function(){
 		mouse[index] = false;
 	});
+
+	// if the mouse is clicked, change the margin left
+	// property to simulate sliding of slider
 	$( this ).mousemove(function(e){
 		if(mouse[index]){
+			// gets the current position of mouse relative to div
 			var offset = $( this ).parent().offset();
 			var new_pos = e.pageX - offset.left;
+			// calculate the change since the last move
 			var change = new_pos - curr_x[index];
+			// resets the current mouse pos to new mouse pos
 			curr_x[index] = new_pos;
+			// gets the current margin-left
 			var strMarginLeft = $( this ).css("margin-left").replace("px","");
 			var marginLeft = window.parseInt(strMarginLeft);
 			var move = marginLeft + change;
+			// tests the left bounds to deny sliding past
 			if(move > 0){
 				move = 0;
 			}
 			var str_movie_width = $( this ).first().css("width").replace("px","");
 			var movie_width = window.parseInt(str_movie_width) / $( this ).children().length;
-			var left_barrier = ($( this ).children().length * movie_width) - (movie_width * 4);			if( move < -left_barrier){
+			var left_barrier = ($( this ).children().length * movie_width) - (movie_width * 4);
+			// tests the right boundaries of slider
+			if( move < -left_barrier){
 				move = -left_barrier;
 			}
 			var str_move = move + "px";
 			// console.log(str_move);
+			// sets the new margin-left property to simulate sliding
 			$( this ).css("margin-left", str_move);
 		}
 	});
 });
 
+// brings up pop-up when a movie is clicked
 $(".com_movies").dblclick(function(e){
 	$("#pop-up").removeClass("pop-out");
 	$('#darken').removeClass("pop-out");
@@ -142,7 +165,7 @@ $(".act_movies").dblclick(function(e){
 	getAll(action[index]);
 });
 
-
+// hides pop-up when anything outside the popup is clicked
 $('#darken').click(function(e){
 	$("#pop-up").removeClass("pop-in");
 	$('#darken').removeClass("pop-in");
